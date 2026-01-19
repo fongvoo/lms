@@ -95,7 +95,7 @@ function restoreImages(text: string, imageMap: Map<string, string>): string {
  * Helper: Build system prompt for tutor
  */
 function buildSystemPrompt(hintLevel: number, context?: TutorContext): string {
-  const base = `Bạn là Trợ Lý Thầy Phúc. Hỗ trợ học sinh giải toán. Dùng LaTeX $...$ cho công thức.`;
+  const base = `Bạn là Trợ Lý Thầy Vũ. Hỗ trợ học sinh giải toán. Dùng LaTeX $...$ cho công thức.`;
   const contextInfo = context ? `\nBài toán: ${context.questionText || ''}\n` : '';
   const levelInfo = [
     "Chỉ gợi ý hướng đi, không giải bài.",
@@ -129,7 +129,7 @@ export const askAITutor = async (
   
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-2.0-flash-exp',
+      model: 'gemini-3-flash-preview',
       contents: `${systemPrompt}\n\nCâu hỏi của học sinh: ${userMessage}`,
       config: {
         temperature: 0.7,
@@ -215,7 +215,7 @@ export const generateQuestionFromAI = async (
     }
 
     const response = await ai.models.generateContent({
-      model: 'gemini-2.0-flash-exp',
+      model: 'gemini-3-flash-preview',
       contents: prompt,
       config: {
         responseMimeType: 'application/json',
@@ -254,7 +254,7 @@ export const performOCR = async (base64Data: string, mimeType: string): Promise<
     `;
 
     const response = await ai.models.generateContent({
-      model: 'gemini-2.0-flash-exp',
+      model: 'gemini-3-flash-preview',
       contents: {
         parts: [
           {
@@ -301,7 +301,7 @@ export const parseQuestionsFromMarkdown = async (markdownText: string, grade: nu
 
   try {
     const response = await ai.models.generateContent({
-        model: 'gemini-2.0-flash-exp',
+        model: 'gemini-3-flash-preview',
         contents: prompt,
         config: {
             responseMimeType: 'application/json',
@@ -353,7 +353,7 @@ Lưu ý:
 `;
 
         const response = await ai.models.generateContent({
-            model: 'gemini-2.0-flash-exp',
+            model: 'gemini-3-flash-preview',
             contents: prompt,
             config: {
                 responseMimeType: 'application/json',
